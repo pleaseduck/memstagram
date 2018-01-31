@@ -2,7 +2,7 @@ var photoLinks = ['photos/1.jpg','photos/2.jpg','photos/3.jpg','photos/4.jpg','p
 var photoLikes = [];
 var photoComments = ['Всё отлично!',
 'В целом всё неплохо. Но не всё',
-'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это епрофессионально',
+'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это непрофессионально',
 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше',
 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше',
 'Лица у людей на фотке перекошены, как будто их избивают.  Как вообще можно было поймать такой неудачный момент?!'];
@@ -21,16 +21,27 @@ for (var i = 0; i < 25; i++) {
   };
   photos[i] = photoDescription;
 }
-console.log(photos)
 
-for (var i = 0; i < 4; i++) {
+for (var i = 0; i < 11; i++) {
   var pictureTemplate = document.querySelector('#picture-template');
-  pictureTemplate.content.querySelector('.picture-comments').innerHTML = photos[randomNumber(photos)].comments;
-  pictureTemplate.content.querySelector('.picture-likes').innerHTML = photos[randomNumber(photos)].likes;
-  pictureTemplate.content.querySelector('img').src = photos[randomNumber(photos)].url;
+  var randomPhoto = randomNumber(photos);
+  pictureTemplate.content.querySelector('.picture-comments').innerHTML = photos[randomPhoto][randomPhoto].comments;
+  pictureTemplate.content.querySelector('.picture-likes').innerHTML = photos[randomPhoto][randomPhoto].likes;
+  pictureTemplate.content.querySelector('img').src = photos[randomPhoto][randomPhoto].url;
   var picturesContainer = document.querySelector('.pictures');
   picturesContainer.appendChild(pictureTemplate.content.cloneNode(true));
 }
+
+var  galleryOverlay = document.querySelector('.gallery-overlay');
+var galleryOverlayImg = document.querySelector('.gallery-overlay-image');
+var galleryOverlayLikes = document.querySelector('.gallery-overlay .likes-count');
+var galleryOverlayComments = document.querySelector('.gallery-overlay .comments-count');
+
+galleryOverlay.classList.remove('hidden');
+galleryOverlayImg.src = photos[1][1].url;
+galleryOverlayLikes.innerHTML = photos[1][1].likes;
+galleryOverlayComments.innerHTML = randomInteger(5, 228);
+
 
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1)
