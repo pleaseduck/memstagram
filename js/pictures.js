@@ -59,15 +59,7 @@ var galleryOverlayComments = document.querySelector('.gallery-overlay .comments-
    if (evt.keyCode === ENTER_KEYCODE) {
      setupPictureDescriprionByKey(event);
    }});
-  /*
-  while (target != table) {
-    if (target.tagName == 'TD') {
-      // нашли элемент, который нас интересует!
-      highlight(target);
-      return;
-    }
-    target = target.parentNode;
-  }*/
+
  function setupPictureDescriprion(event) {
    event.preventDefault();
    var target = event.target;
@@ -85,7 +77,6 @@ var galleryOverlayComments = document.querySelector('.gallery-overlay .comments-
   function setupPictureDescriprionByKey() {
     event.preventDefault();
     var target = event.target;
-    console.log(target)
         var photoStats = target.lastElementChild;
         var photoComment = photoStats.firstElementChild.innerHTML;
         var photoLike = photoStats.lastElementChild.innerHTML;
@@ -107,6 +98,40 @@ var galleryOverlayComments = document.querySelector('.gallery-overlay .comments-
     }
   });
 
+  var uploadInput = document.querySelector('#upload-file');
+  var uploadOverlay = document.querySelector('.upload-overlay');
+  var uploadOverlayCloser = document.querySelector('.upload-form-cancel');
+  var uploadEffectsForm = document.querySelector('.upload-effect-controls');
+  var closeUploadOverlay = function () {
+      uploadOverlay.classList.add('hidden');
+  };
+  var changePhotoEffect = function() {
+    var target = event.target;
+    var photoEffect = target.parentNode.previousElementSibling.id;
+    var setPhotoEffect = document.querySelector('.upload-form-preview img');
+    setPhotoEffect.setAttribute('class', photoEffect)
+    console.log(target);
+    console.log(photoEffect);
+  }
+
+  uploadInput.addEventListener('change', function() {
+    uploadOverlay.classList.remove('hidden');
+    document.addEventListener('keydown', function(evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        closeUploadOverlay();
+      }
+    });
+  });
+
+  uploadOverlayCloser.addEventListener('click', closeUploadOverlay);
+
+  uploadOverlayCloser.addEventListener('keydown', function(evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      closeUploadOverlay();
+    };
+  });
+  uploadEffectsForm.addEventListener('click', changePhotoEffect)
+
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1)
     rand = Math.round(rand);
@@ -115,15 +140,3 @@ function randomInteger(min, max) {
   function randomNumber(array) {
   return Math.floor(Math.random()*array.length);
 }
-/*
-for (var i = 0; i < 4; i++) {
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template');
-  similarWizardTemplate.content.querySelector('.setup-similar-label').innerHTML =  wizardСharacteristics.name[randomNumber(wizardСharacteristics.name)] +
-  wizardСharacteristics.surname[randomNumber(wizardСharacteristics.surname)];
-  similarWizardTemplate.content.querySelector('.wizard-coat').style.fill = wizardСharacteristics.coat[randomNumber(wizardСharacteristics.coat)];
-  similarWizardTemplate.content.querySelector('.wizard-eyes').style.fill = wizardСharacteristics.eyesColor[randomNumber(wizardСharacteristics.eyesColor)];
-
-  wizardsList.appendChild(similarWizardTemplate.content.cloneNode(true));
-  console.log(similarWizardTemplate.content.querySelector('.setup-similar-label'))
-}
-*/
