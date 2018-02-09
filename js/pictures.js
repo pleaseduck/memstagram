@@ -22,7 +22,7 @@ for (var i = 0; i < 25; i++) {
   photos[i] = photoDescription;
 }
 
-for (var i = 0; i < 11; i++) {
+for (var i = 0; i < 19; i++) {
   var pictureTemplate = document.querySelector('#picture-template');
   var randomPhoto = randomNumber(photos);
   pictureTemplate.content.querySelector('.picture-comments').innerHTML = photos[randomPhoto][randomPhoto].comments;
@@ -37,11 +37,75 @@ var galleryOverlayImg = document.querySelector('.gallery-overlay-image');
 var galleryOverlayLikes = document.querySelector('.gallery-overlay .likes-count');
 var galleryOverlayComments = document.querySelector('.gallery-overlay .comments-count');
 
-galleryOverlay.classList.remove('hidden');
-galleryOverlayImg.src = photos[1][1].url;
-galleryOverlayLikes.innerHTML = photos[1][1].likes;
-galleryOverlayComments.innerHTML = randomInteger(5, 228);
 
+ var galleryOverlayCloser = galleryOverlay.querySelector('.gallery-overlay-close');
+ var ESC_KEYCODE = 27;
+ var ENTER_KEYCODE = 13;
+ var openOverlay = function () {
+     galleryOverlay.classList.remove('hidden');
+     document.addEventListener('keydown', function(evt) {
+       if (evt.keyCode === ESC_KEYCODE) {
+         closeOverlay();
+       }
+     });
+ };
+ var closeOverlay = function () {
+     galleryOverlay.classList.add('hidden');
+ };
+
+ picturesContainer.addEventListener('click', setupPictureDescriprion);
+
+ picturesContainer.addEventListener('keydown', function(evt) {
+   if (evt.keyCode === ENTER_KEYCODE) {
+     setupPictureDescriprionByKey(event);
+   }});
+  /*
+  while (target != table) {
+    if (target.tagName == 'TD') {
+      // нашли элемент, который нас интересует!
+      highlight(target);
+      return;
+    }
+    target = target.parentNode;
+  }*/
+ function setupPictureDescriprion(event) {
+   event.preventDefault();
+   var target = event.target;
+       var photoStats = target.nextSibling.nextElementSibling;
+       var photoComment = photoStats.firstElementChild.innerHTML;
+       var photoLike = photoStats.lastElementChild.innerHTML;
+       galleryOverlayImg.src = target.src;
+       galleryOverlayLikes.innerHTML = photoLike;
+       galleryOverlayComments.innerHTML = photoComment;
+       console.log(photoStats);
+       console.log(photoComment);
+       console.log(target.src);
+      openOverlay();
+ }
+  function setupPictureDescriprionByKey() {
+    event.preventDefault();
+    var target = event.target;
+    console.log(target)
+        var photoStats = target.lastElementChild;
+        var photoComment = photoStats.firstElementChild.innerHTML;
+        var photoLike = photoStats.lastElementChild.innerHTML;
+        var choosenImg =  target.firstElementChild;
+        galleryOverlayImg.src = choosenImg.src;
+        galleryOverlayLikes.innerHTML = photoLike;
+        galleryOverlayComments.innerHTML = photoComment;
+        console.log(photoStats);
+        console.log(photoComment);
+        console.log(target.src);
+       openOverlay();
+  }
+
+
+  galleryOverlayCloser.addEventListener('click', closeOverlay);
+  galleryOverlayCloser.addEventListener('keydown', function(evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      closeOverlay();
+    }
+  });
 
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1)
