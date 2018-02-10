@@ -132,6 +132,36 @@ var galleryOverlayComments = document.querySelector('.gallery-overlay .comments-
   });
   uploadEffectsForm.addEventListener('click', changePhotoEffect)
 
+  var decreaseBtn = document.querySelector('.upload-resize-controls-button-dec');
+  var increaseBtn = document.querySelector('.upload-resize-controls-button-inc');
+  var sizeControlInput = document.querySelector('.upload-resize-controls-value');
+  var previewPhoto = document.querySelector('.effect-image-preview');
+  var decreaseValue = function () {
+    if (sizeControlInput.value == '100%') {
+      sizeControlInput.value = '75%';
+      previewPhoto.style.transform = 'scale(0.75)';
+    } else if (sizeControlInput.value == '75%') {
+        sizeControlInput.value = '50%';
+        previewPhoto.style.transform = 'scale(0.5)';
+    } else if (sizeControlInput.value = '50%') {
+        sizeControlInput.value = '25%';
+        previewPhoto.style.transform = 'scale(0.25)';
+    };
+  }
+  var increaseValue = function () {
+    if (sizeControlInput.value == '25%') {
+      sizeControlInput.value = '50%';
+      previewPhoto.style.transform = 'scale(0.5)';
+    } else if (sizeControlInput.value == '50%') {
+        sizeControlInput.value = '75%';
+        previewPhoto.style.transform = 'scale(0.75)';
+    } else if (sizeControlInput.value = '75%') {
+        sizeControlInput.value = '100%';
+        previewPhoto.style.transform = 'scale(1)';
+    };
+  }
+  decreaseBtn.addEventListener('click', decreaseValue);
+  increaseBtn.addEventListener('click', increaseValue);
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1)
     rand = Math.round(rand);
