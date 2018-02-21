@@ -119,32 +119,32 @@ body {
 
 .upload-effect-label-chrome .upload-effect-preview,
 .effect-chrome {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  -webkit-filter: grayscale(20%);
+          filter: grayscale(20%);
 }
 
 .upload-effect-label-sepia .upload-effect-preview,
 .effect-sepia {
-  -webkit-filter: sepia(1);
-          filter: sepia(1);
+  -webkit-filter: sepia(0.2);
+          filter: sepia(0.2);
 }
 
 .upload-effect-label-marvin .upload-effect-preview,
 .effect-marvin {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
+  -webkit-filter: invert(20%);
+          filter: invert(20%);
 }
 
 .upload-effect-label-phobos .upload-effect-preview,
 .effect-phobos {
-  -webkit-filter: blur(5px);
-          filter: blur(5px);
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
 }
 
 .upload-effect-label-heat .upload-effect-preview,
 .effect-heat {
-  -webkit-filter: brightness(3);
-          filter: brightness(3);
+  -webkit-filter: brightness(0.6);
+          filter: brightness(0.6);
 }
 
 .upload-input {
