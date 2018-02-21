@@ -36,10 +36,15 @@
       window.util.isEnterEvent(event, closeUploadOverlay);
   });
 
-
-  uploadEffectsForm.addEventListener('click', function() {
+  var sliderBlock = document.querySelector('.upload-effect-level');
+  uploadEffectsForm.addEventListener('click', function(evt) {
+    var clickTarget = evt.target;
+    if(clickTarget.parentNode.previousElementSibling.id !== 'effect-none') {
+      sliderBlock.classList.remove('hidden');
+    } else {
+        sliderBlock.classList.add('hidden');
+    }
     changePhotoEffect();
-      console.log(setPhotoEffect.className);
   });
 
   var decreaseBtn = document.querySelector('.upload-resize-controls-button-dec');
