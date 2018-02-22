@@ -4,6 +4,9 @@
   var uploadOverlayCloser = document.querySelector('.upload-form-cancel');
   var uploadEffectsForm = document.querySelector('.upload-effect-controls');
   var setPhotoEffect = document.querySelector('.upload-form-preview img');
+  var sliderElem = document.querySelector('.upload-effect-level-line');
+  var thumbElem = sliderElem.children[0];
+  var sliderVal = document.querySelector('.upload-effect-level-val');
 
   var closeUploadOverlay = function () {
       uploadOverlay.classList.add('hidden');
@@ -16,6 +19,8 @@
       for (var i = 0; i < photoEffectInputs.length; i++) {
         photoEffectInputs[i].removeAttribute('checked');
       }
+      thumbElem.style.left = '20%';
+      sliderVal.style.width = '20%';
       target.parentNode.previousElementSibling.setAttribute('checked', true);
       setPhotoEffect.style.filter = '';
       setPhotoEffect.setAttribute('class', photoEffect);
@@ -78,13 +83,9 @@
   decreaseBtn.addEventListener('click', decreaseValue);
   increaseBtn.addEventListener('click', increaseValue);
 
-  var sliderElem = document.querySelector('.upload-effect-level-line');
-  var thumbElem = sliderElem.children[0];
-
   thumbElem.onmousedown = function(e) {
     var thumbCoords = getCoords(thumbElem);
     var shiftX = e.pageX - thumbCoords.left;
-    var sliderVal = document.querySelector('.upload-effect-level-val');
     var sliderWidth = sliderElem.clientWidth;
 
     // shiftY здесь не нужен, слайдер двигается только по горизонтали
@@ -111,7 +112,6 @@
         setPhotoEffect.style.filter = 'grayscale(' + parseInt(sliderVal.style.width) / parseInt(sliderWidth) + ')';
       } else if(setPhotoEffect.classList.contains('effect-sepia')) {
         setPhotoEffect.style.filter = 'sepia(' + parseInt(sliderVal.style.width) / parseInt(sliderWidth) + ')';
-        console.log(setPhotoEffect.style.filter);
       }else if(setPhotoEffect.classList.contains('effect-marvin')) {
           setPhotoEffect.style.filter = 'invert(' + (parseInt(sliderVal.style.width) / parseInt(sliderWidth))*100 + '%)';
       } else if(setPhotoEffect.classList.contains('effect-phobos')) {
